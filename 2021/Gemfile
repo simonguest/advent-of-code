@@ -2,4 +2,5 @@
 
 gem 'rake'
 gem 'rubocop', require: false
+gem 'solargraph', require: false
 gem 'test-unit'

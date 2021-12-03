@@ -4,7 +4,7 @@ require 'test/unit'
 require_relative './depth'
 
 # Tests for Day One
-class AllTests < Test::Unit::TestCase
+class DayOneTests < Test::Unit::TestCase
   def test_depth_part_one
     increases = Depth.measure_pairs_from_csv './01/testdata.csv'
     assert increases == 7
