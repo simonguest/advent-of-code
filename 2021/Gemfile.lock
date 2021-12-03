@@ -10,12 +10,12 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
+    minitest (5.14.4)
     nokogiri (1.12.5-arm64-darwin)
       racc (~> 1.4)
     parallel (1.12.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
-    power_assert (1.1.7)
     racc (1.6.0)
     rainbow (3.0.0)
     rake (13.0.6)
@@ -23,6 +23,19 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+    rspec-core (3.10.1)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.3)
     rubocop (1.22.3)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -50,8 +63,6 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
-    test-unit (3.3.4)
-      power_assert
     thor (1.1.0)
     tilt (2.0.10)
     unicode-display_width (2.1.0)
@@ -63,10 +74,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  minitest
   rake
+  rspec
   rubocop
   solargraph
-  test-unit
 
 BUNDLED WITH
    2.1.4
