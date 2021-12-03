@@ -7,7 +7,7 @@ module Dive
   def self.calculate_position_from_file(filename)
     horizontal_position = 0
     depth = 0
-    CSV.foreach(filename, 'r', { col_sep: ' ' }) do |direction|
+    CSV.foreach(filename, 'r', **{ col_sep: ' ' }) do |direction|
       case direction[0]
       when 'forward'
         horizontal_position += direction[1].to_i
@@ -24,7 +24,7 @@ module Dive
     horizontal_position = 0
     depth = 0
     aim = 0
-    CSV.foreach(filename, 'r', { col_sep: ' ' }) do |direction|
+    CSV.foreach(filename, 'r', **{ col_sep: ' ' }) do |direction|
       case direction[0]
       when 'forward'
         horizontal_position += direction[1].to_i

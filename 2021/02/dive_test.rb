@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'test/unit'
+require 'minitest/autorun'
 require_relative './dive'
 
 # Tests for Day Two
-class DayTwoTests < Test::Unit::TestCase
+class DayTwoTests < MiniTest::Test
   def test_dive_part_one
     total = Dive.calculate_position_from_file './02/testdata.csv'
     assert total == 150

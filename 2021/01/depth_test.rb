@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'test/unit'
+require 'minitest/autorun'
 require_relative './depth'
 
 # Tests for Day One
-class DayOneTests < Test::Unit::TestCase
+class DayOneTests < Minitest::Test
   def test_depth_part_one
     increases = Depth.measure_pairs_from_csv './01/testdata.csv'
     assert increases == 7
