@@ -1,13 +1,27 @@
 GEM
   specs:
     ast (2.4.2)
+    backport (1.2.0)
+    benchmark (0.1.0)
+    diff-lcs (1.4.4)
+    e2mmap (0.1.0)
+    jaro_winkler (1.5.4)
+    kramdown (2.3.1)
+      rexml
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
+    nokogiri (1.12.5-arm64-darwin)
+      racc (~> 1.4)
     parallel (1.12.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
     power_assert (1.1.7)
+    racc (1.6.0)
     rainbow (3.0.0)
     rake (13.0.6)
     regexp_parser (2.1.1)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.5)
     rubocop (1.22.3)
       parallel (~> 1.10)
@@ -21,9 +35,29 @@ GEM
     rubocop-ast (1.12.0)
       parser (>= 3.0.1.1)
     ruby-progressbar (1.10.1)
+    solargraph (0.44.2)
+      backport (~> 1.2)
+      benchmark
+      bundler (>= 1.17.2)
+      diff-lcs (~> 1.4)
+      e2mmap
+      jaro_winkler (~> 1.5)
+      kramdown (~> 2.3)
+      kramdown-parser-gfm (~> 1.1)
+      parser (~> 3.0)
+      reverse_markdown (>= 1.0.5, < 3)
+      rubocop (>= 0.52)
+      thor (~> 1.0)
+      tilt (~> 2.0)
+      yard (~> 0.9, >= 0.9.24)
     test-unit (3.3.4)
       power_assert
+    thor (1.1.0)
+    tilt (2.0.10)
     unicode-display_width (2.1.0)
+    webrick (1.7.0)
+    yard (0.9.27)
+      webrick (~> 1.7.0)
 
 PLATFORMS
   ruby
@@ -31,6 +65,7 @@ PLATFORMS
 DEPENDENCIES
   rake
   rubocop
+  solargraph
   test-unit
 
 BUNDLED WITH

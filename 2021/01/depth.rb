@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'CSV'
+require 'csv'
 
 # Module to calculate depth puzzle on day one
 module Depth
@@ -13,8 +13,8 @@ module Depth
   end
 
   def self.measure_pairs_from_csv(filename)
-    csv = CSV.read(filename)
-    measure_pairs_from_array(csv.flatten[1..].map(&:to_i))
+    data = CSV.read(filename)
+    measure_pairs_from_array(data.flatten[1..].map(&:to_i))
   end
 
   def self.measure_triples_from_array(measurements)
@@ -28,7 +28,7 @@ module Depth
   end
 
   def self.measure_triples_from_csv(filename)
-    csv = CSV.read(filename)
-    measure_triples_from_array(csv.flatten[1..].map(&:to_i))
+    data = CSV.read(filename)
+    measure_triples_from_array(data.flatten[1..].map(&:to_i))
   end
 end
