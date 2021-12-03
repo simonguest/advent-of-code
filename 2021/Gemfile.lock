@@ -23,19 +23,6 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
-    rspec (3.10.0)
-      rspec-core (~> 3.10.0)
-      rspec-expectations (~> 3.10.0)
-      rspec-mocks (~> 3.10.0)
-    rspec-core (3.10.1)
-      rspec-support (~> 3.10.0)
-    rspec-expectations (3.10.1)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.2)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-support (3.10.3)
     rubocop (1.22.3)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -76,7 +63,6 @@ PLATFORMS
 DEPENDENCIES
   minitest
   rake
-  rspec
   rubocop
   solargraph
 
