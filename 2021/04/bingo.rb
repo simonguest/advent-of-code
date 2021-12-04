@@ -123,12 +123,11 @@ module Bingo
     numbers.each do |number|
       game = play_move(game, number)
       if find_non_winning_sheets(game).length.zero?
-        return number * sum_unmarked_numbers(game[:boards][non_winning_sheets[0]], game[:sheets][non_winning_sheets[0]])
-      else
-        non_winning_sheets = find_non_winning_sheets(game)
+        return number * sum_unmarked_numbers(game[:boards][non_winning_sheets[0]],
+                                             game[:sheets][non_winning_sheets[0]])
       end
+      non_winning_sheets = find_non_winning_sheets(game)
     end
     nil
   end
-
 end

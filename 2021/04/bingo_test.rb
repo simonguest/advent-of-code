@@ -13,7 +13,7 @@ class DayFourTests < MiniTest::Test
 
   def test_bing_part_two
     total = Bingo.play_game_last_winner('./04/testnumbers.csv', './04/testboards.csv')
-    assert total = 1924
+    assert total == 1924
     p Bingo.play_game_last_winner('./04/numbers.csv', './04/boards.csv')
   end
 end

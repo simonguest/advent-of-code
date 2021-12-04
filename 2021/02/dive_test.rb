@@ -12,9 +12,9 @@ class DayTwoTests < MiniTest::Test
   end
 
   def test_dive_part_two
-    total = Dive.calculate_position_with_aim_from_file './02/testdata.csv'
+    total = Dive.calculate_position_with_aim './02/testdata.csv'
     p total
     assert total == 900
-    p Dive.calculate_position_with_aim_from_file './02/data.csv'
+    p Dive.calculate_position_with_aim './02/data.csv'
   end
 end

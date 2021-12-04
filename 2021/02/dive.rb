@@ -15,12 +15,14 @@ module Dive
         depth -= direction[1].to_i
       when 'down'
         depth += direction[1].to_i
+      else
+        assert false
       end
     end
     horizontal_position * depth
   end
 
-  def self.calculate_position_with_aim_from_file(filename)
+  def self.calculate_position_with_aim(filename)
     horizontal_position = 0
     depth = 0
     aim = 0
@@ -33,6 +35,8 @@ module Dive
         aim -= direction[1].to_i
       when 'down'
         aim += direction[1].to_i
+      else
+        assert false
       end
     end
     horizontal_position * depth
