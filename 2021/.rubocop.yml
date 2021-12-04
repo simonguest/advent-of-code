@@ -2,3 +2,5 @@ AllCops:
   NewCops: enable
 Metrics/MethodLength:
   Max: 25
+Metrics/ModuleLength:
+  Max: 150
