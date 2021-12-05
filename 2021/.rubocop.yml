@@ -5,4 +5,4 @@ Metrics/MethodLength:
 Metrics/ModuleLength:
   Max: 150
 Metrics/AbcSize:
-  Max: 20
+  Max: 50
