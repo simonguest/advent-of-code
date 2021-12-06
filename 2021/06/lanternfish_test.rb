@@ -9,6 +9,11 @@ class DaySixTests < MiniTest::Test
     total = LanternFish.run_fish './06/testdata.csv', 80
     assert total == 5934
     p LanternFish.run_fish './06/data.csv', 80
+  end
+
+  def test_fish_part_two
+    total = LanternFish.run_fish './06/testdata.csv', 256
+    assert total == 26_984_457_539
     p LanternFish.run_fish './06/data.csv', 256
   end
 end
