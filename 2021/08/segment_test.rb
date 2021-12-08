@@ -10,4 +10,10 @@ class DayEightTests < MiniTest::Test
     assert total == 26
     p Segment.count_1_4_7_8 './08/data.csv'
   end
+
+  def test_segment_part_two
+    total = Segment.decipher './08/testdata.csv'
+    assert total == 61_229
+    p Segment.decipher './08/data.csv'
+  end
 end

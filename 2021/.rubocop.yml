@@ -5,6 +5,12 @@ Metrics/MethodLength:
 Metrics/ModuleLength:
   Max: 150
 Metrics/AbcSize:
-  Max: 50
+  Enabled: False
+Metrics/CyclomaticComplexity:
+  Enabled: False
+Metrics/PerceivedComplexity:
+  Enabled: False
 Naming/VariableNumber:
+  Enabled: False
+Style/CombinableLoops:
   Enabled: False
