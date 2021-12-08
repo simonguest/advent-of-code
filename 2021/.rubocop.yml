@@ -6,3 +6,5 @@ Metrics/ModuleLength:
   Max: 150
 Metrics/AbcSize:
   Max: 50
+Naming/VariableNumber:
+  Enabled: False
