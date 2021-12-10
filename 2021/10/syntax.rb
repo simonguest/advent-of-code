@@ -20,25 +20,65 @@ module Syntax
       next unless closes.include?(char)
       if stack.pop != opens[closes.index(char)]
         # Error in code!
-        return [char]
+        return { error: char }
       end
     end
-    []
+    { stack: stack }
   end
 
-  def self.scan_code(filename)
-    errors = []
+  def self.scan_code_for_errors(filename)
+    results = []
     score = 0
     lines = load_code filename
     lines.each do |line|
-      errors << scan_line(line)
+      results << scan_line(line)
     end
-    errors.flatten.each do |error|
-      score += 3 if error == ')'
-      score += 57 if error == ']'
-      score += 1197 if error == '}'
-      score += 25_137 if error == '>'
+    results.flatten.each do |result|
+      score += 3 if result[:error] == ')'
+      score += 57 if result[:error] == ']'
+      score += 1197 if result[:error] == '}'
+      score += 25_137 if result[:error] == '>'
     end
     score
+  end
+
+  def self.reverse_stack(stack)
+    opens = '{([<'
+    closes = '})]>'
+    closing_stack = []
+    stack.reverse.each do |symbol|
+      closing_stack << closes[opens.index(symbol)]
+    end
+    closing_stack
+  end
+
+  def self.autocomplete_score(stack)
+    total = 0
+    stack.each do |symbol|
+      total *= 5
+      total += 2 if symbol == ']'
+      total += 1 if symbol == ')'
+      total += 3 if symbol == '}'
+      total += 4 if symbol == '>'
+    end
+    total
+  end
+
+  def self.find_median(array)
+    sorted = array.sort
+    len = sorted.length
+    (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+  end
+
+  def self.scan_code_for_incomplete_lines(filename)
+    totals = []
+    lines = load_code filename
+    lines.each do |line|
+      result = scan_line line
+      next unless result[:error].nil?
+
+      totals << autocomplete_score(reverse_stack(result[:stack]))
+    end
+    find_median(totals).to_i
   end
 end
