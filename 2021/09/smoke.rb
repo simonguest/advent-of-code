@@ -4,98 +4,46 @@ require 'csv'
 
 # Module for Day 9 puzzle
 module Smoke
+  def self.find_adjacent_cells(map, coords)
+    x = coords[:x]
+    y = coords[:y]
+    width = map[0].length - 1
+    height = map.length - 1
+    adjacent_cells = [{ x: x, y: y - 1 }, { x: x, y: y + 1 }, { x: x - 1, y: y }, { x: x + 1, y: y }]
+    # Remove out of bounds cells
+    adjacent_cells.filter do |cell|
+      (cell[:x] >= 0 && cell[:x] <= height) && (cell[:y] >= 0 && cell[:y] <= width)
+    end
+  end
+
+  def self.low_point?(map, coords)
+    lower = true
+    adjacent_cells = find_adjacent_cells(map, coords)
+    adjacent_cells.each do |cell|
+      lower = false if map[coords[:x]][coords[:y]] >= map[cell[:x]][cell[:y]]
+    end
+    lower
+  end
+
   def self.load_map(filename)
-    scans = []
+    map = []
     data = File.open(filename).readlines
-    (0..data.length - 3).map do |line|
-      scan = [data[line].strip, data[line + 1].strip, data[line + 2].strip]
-      scans << scan
+    (0..data.length - 1).map do |line|
+      map << data[line].strip.chars.map(&:to_i)
     end
-    { scans: scans, size: [data.length, data[0].length] }
-  end
-
-  def self.check_top(scan)
-    low_points = []
-    # Check top row
-    (1..scan[0].length - 2).map do |cursor|
-      next unless scan[0][cursor - 1] > scan[0][cursor] &&
-                  scan[0][cursor + 1] > scan[0][cursor] &&
-                  scan[1][cursor] > scan[0][cursor]
-
-      low_points << scan[0][cursor]
-    end
-    # Check corners
-    if scan[0][1] > scan[0][0] &&
-       scan[1][0] > scan[0][0]
-      low_points << scan[0][0]
-    end
-    if scan[0][scan[0].length - 2] > scan[0][scan[0].length - 1] &&
-       scan[1][scan[0].length - 2] > scan[0][scan[0].length - 1]
-      low_points << scan[0][scan[0].length - 1]
-    end
-    low_points
-  end
-
-  def self.check_row(scan)
-    low_points = []
-    # Check middle of the row
-    (1..scan[1].length - 2).map do |cursor|
-      next unless scan[1][cursor - 1] > scan[1][cursor] &&
-                  scan[1][cursor + 1] > scan[1][cursor] &&
-                  scan[0][cursor] > scan[1][cursor] &&
-                  scan[2][cursor] > scan[1][cursor]
-
-      low_points << scan[1][cursor]
-    end
-    # Check edges
-    if scan[1][1] > scan[1][0] &&
-       scan[0][0] > scan[1][0] &&
-       scan[2][0] > scan[1][0]
-      low_points << scan[1][0]
-    end
-    if scan[1][scan[1].length - 2] > scan[1][scan[1].length - 1] &&
-       scan[0][scan[1].length - 1] > scan[1][scan[1].length - 1] &&
-       scan[2][scan[1].length - 1] > scan[1][scan[1].length - 1]
-      low_points << scan[1][scan[1].length - 1]
-    end
-    low_points
-  end
-
-  def self.check_bottom(scan)
-    low_points = []
-    # Check top row
-    (1..scan[2].length - 2).map do |cursor|
-      next unless scan[2][cursor - 1] > scan[2][cursor] &&
-                  scan[2][cursor + 1] > scan[2][cursor] &&
-                  scan[1][cursor] > scan[2][cursor]
-
-      low_points << scan[2][cursor]
-    end
-    # Check corners
-    if scan[2][1] > scan[2][0] &&
-       scan[1][0] > scan[2][0]
-      low_points << scan[2][0]
-    end
-    if scan[2][scan[0].length - 2] > scan[2][scan[0].length - 1] &&
-       scan[1][scan[0].length - 2] > scan[2][scan[0].length - 1]
-      low_points << scan[2][scan[0].length - 1]
-    end
-    low_points
-  end
-
-  def self.find_low_points(scans)
-    low_points = []
-    low_points << check_top(scans[0])
-    scans.each do |scan|
-      low_points << check_row(scan)
-    end
-    low_points << check_bottom(scans[scans.length - 1])
-    low_points
+    map
   end
 
   def self.scan_map_for_low_points(filename)
+    low_points = []
     map = load_map filename
-    low_points = find_low_points(map[:scans])
-    low_points.flatten.map(&:to_i).map { |x| x + 1 }.sum
+    map.each_with_index do |row, row_index|
+      row.each_with_index do |_, cell_index|
+        if low_point?(map, { x: row_index, y: cell_index })
+          low_points << { x: row_index, y: cell_index, value: map[row_index][cell_index] }
+        end
+      end
+    end
+    low_points.map { |p| p[:value] + 1 }.sum
   end
 end
