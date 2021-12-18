@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'csv'
-
 # Module for Day 9 puzzle
 module Smoke
   def self.find_adjacent_cells(map, coords)
@@ -25,6 +23,16 @@ module Smoke
     lower
   end
 
+  def self.walk_basin(map, coords, trail)
+    walked = 1
+    trail << coords
+    adjacent_cells = find_adjacent_cells(map, coords)
+    adjacent_cells.each do |cell|
+      walked += walk_basin(map, cell, trail) if map[cell[:x]][cell[:y]] < 9 && trail.find { |c| c == cell }.nil?
+    end
+    walked
+  end
+
   def self.load_map(filename)
     map = []
     data = File.open(filename).readlines
@@ -45,5 +53,19 @@ module Smoke
       end
     end
     low_points.map { |p| p[:value] + 1 }.sum
+  end
+
+  def self.scan_map_for_basins(filename)
+    basins = []
+    map = load_map(filename)
+    map.each_with_index do |row, row_index|
+      row.each_with_index do |_, cell_index|
+        if low_point?(map, { x: row_index, y: cell_index })
+          basins << walk_basin(map, { x: row_index, y: cell_index }, [])
+        end
+      end
+    end
+    largest = basins.sort.reverse[0..2]
+    largest[0] * largest[1] * largest[2]
   end
 end
