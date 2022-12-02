@@ -95,7 +95,7 @@ const run2 = async () => {
     (error, rounds: Round[]) => {
       if (error) console.error(error);
       let total = 0;
-      rounds = rounds.map((r) => {
+      rounds.forEach((r) => {
         switch (r.myMove.toString()) {
           case "X": {
             if (r.oppMove === Move.Rock) r.myMove = Move.Scissors;
@@ -114,9 +114,6 @@ const run2 = async () => {
             break;
           }
         }
-        return r;
-      });
-      rounds.forEach((r) => {
         total += calculateScore(r);
       });
       console.log(total);
