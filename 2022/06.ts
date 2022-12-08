@@ -16,7 +16,7 @@ const isFrameUnique = (stream: DataStream, frameLength: number) => {
   if (stream.frame.length < frameLength) return false;
   let frameMap = new Map<string, number>();
   stream.frame.forEach((c) => {
-    frameMap.set(c, frameMap.get(c) + 1 || 1);
+    frameMap.set(c, frameMap.get(c) + 1 || 1); 
   });
   return Array.from(frameMap.values()).length === frameLength;
 };
